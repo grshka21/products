@@ -5,6 +5,7 @@ public class Product
     private int _stock;
     private int _minStock;
     private Supplier _supplier;
+    private int _writtenOffTotal;
 
     public string Name { get; }
 
@@ -46,6 +47,8 @@ public class Product
         Supplier = supplier;
     }
 
+    public int WrittenOffTotal => _writtenOffTotal;
+
     public Product(string name, int initialStock, int minStock = 0)
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -57,6 +60,7 @@ public class Product
         Stock = initialStock;
         MinStock = minStock;
     }
+
     public void RemoveStock(int amount)
     {
         if (amount <= 0)
@@ -65,5 +69,16 @@ public class Product
             throw new InvalidOperationException("Недостаточно товара на складе.");
 
         Stock -= amount;
+    }
+
+    public void WriteOff(int amount, string reason)
+    {
+        if (string.IsNullOrWhiteSpace(reason))
+            throw new ArgumentException("Необходимо указать причину списания.", nameof(reason));
+
+        RemoveStock(amount);
+
+        _writtenOffTotal += amount;
+        Console.WriteLine($"[Списание] Товар: {Name}, Кол-во: {amount}, Причина: {reason}");
     }
 }
