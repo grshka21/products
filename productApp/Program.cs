@@ -19,5 +19,18 @@ class Program
         {
             Console.WriteLine($"- {item.Name}: остаток {item.Stock} (мин. {item.MinStock})");
         }
+
+        var supplier1 = new Supplier("ООО СтройСнаб", "+7 999 123-45-67", "7701234567");
+        var supplier2 = new Supplier("ИП Иванов", "8-800-555-35-35", "770123456789");
+
+        drill.AssignSupplier(supplier1);
+        hammer.AssignSupplier(supplier1);
+        saw.AssignSupplier(supplier2);
+
+        Console.WriteLine("\n=== Информация о поставщиках ===");
+        foreach (var item in products)
+        {
+            Console.WriteLine($"{item.Name} -> Поставщик: {item.Supplier}");
+        }
     }
 }
