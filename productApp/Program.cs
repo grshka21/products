@@ -32,5 +32,9 @@ class Program
         {
             Console.WriteLine($"{item.Name} -> Поставщик: {item.Supplier}");
         }
+
+        Console.WriteLine("\n=== Операции списания ===");
+        drill.WriteOff(2, "повреждение при транспортировке");
+        Console.WriteLine($"Остаток '{drill.Name}': {drill.Stock}, Всего списано: {drill.WrittenOffTotal}");
     }
 }
