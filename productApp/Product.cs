@@ -4,6 +4,7 @@ public class Product
 {
     private int _stock;
     private int _minStock;
+    private Supplier _supplier;
 
     public string Name { get; }
 
@@ -31,6 +32,20 @@ public class Product
         MinStock = value;
     }
 
+    public Supplier Supplier
+    {
+        get => _supplier;
+        private set => _supplier = value;
+    }
+
+    public void AssignSupplier(Supplier supplier)
+    {
+        if (supplier == null)
+            throw new ArgumentNullException(nameof(supplier), "Поставщик не может быть null.");
+
+        Supplier = supplier;
+    }
+
     public Product(string name, int initialStock, int minStock = 0)
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -42,7 +57,6 @@ public class Product
         Stock = initialStock;
         MinStock = minStock;
     }
-
     public void RemoveStock(int amount)
     {
         if (amount <= 0)
